@@ -1,0 +1,178 @@
+﻿# 変数一覧
+
+Nays2DHプログラムで使用される主要な変数について説明します。これらの変数は各モジュールで定義され、プログラム全体で共有されています。
+
+## 基本変数
+
+| 変数名 | 型 | 意味 |
+|--------|-----|------|
+| `im`, `jm` | integer | 計算格子の最大インデックス |
+| `nx`, `ny` | integer | 計算格子の実際のサイズ |
+| `dt` | real(8) | 計算の時間ステップ |
+| `time` | real(8) | 現在の計算時間 |
+| `g` | real(8) | 重力加速度 |
+| `rho` | real(8) | 水の密度 |
+| `spec` | real(8) | 砂の水中比重 |
+| `snu00` | real(8) | 分子動粘性係数 |
+| `skp` | real(8) | カルマン定数 |
+
+## 座標系関連
+
+```fortran
+module common_cmxy
+  implicit none
+  real(8),dimension(:,:),allocatable :: x, y
+  real(8),dimension(:,:),allocatable :: dn, ds
+  real(8),dimension(:,:),allocatable :: eta, eta_init, z0
+  real(8),dimension(:),allocatable :: s_center, s_center_t, s_center_t2
+end module common_cmxy
+```
+
+| 変数名 | 意味 |
+|--------|------|
+| `x`, `y` | 計算格子の座標 |
+| `dn`, `ds` | 格子間隔 |
+| `eta` | 河床高さ |
+| `eta_init` | 初期河床高さ |
+| `z0` | 基準面高さ |
+| `s_center` | 中心線長さ |
+
+## 流れ関連
+
+```fortran
+module common_cmuv
+  implicit none
+  real(8),dimension(:,:),allocatable :: yu, yv
+  real(8),dimension(:,:),allocatable :: yun, yvn
+end module common_cmuv
+
+module common_cmhq
+  implicit none
+  real(8),dimension(:,:),allocatable :: h, hs
+  real(8),dimension(:,:),allocatable :: q_xi, q_et
+end module common_cmhq
+```
+
+| 変数名 | 意味 |
+|--------|------|
+| `yu`, `yv` | $x$方向、$y$方向の流速 |
+| `yun`, `yvn` | 次のステップの流速 |
+| `h` | 水位 |
+| `hs` | 水深 |
+| `q_xi`, `q_et` | $\xi$方向、$\eta$方向の流量 |
+
+## 河床変動関連
+
+```fortran
+module common_cmtst
+  implicit none
+  real(8),dimension(:,:),allocatable :: tausta, usta, vti
+  real(8),dimension(:,:),allocatable :: us_bed, un_bed
+end module common_cmtst
+
+module common_cmsui
+  implicit none
+  real(8),dimension(:,:),allocatable :: dex, dey, de
+  real(8),dimension(:),allocatable :: qbx_ttl, qby_ttl, de_vol
+end module common_cmsui
+
+module mix
+  implicit none
+  integer :: j_mix, nk, nm
+  integer,dimension(:,:),allocatable :: nb, flg_mix
+  real(8) :: e_d, e_thick, e_m
+  real(8),dimension(:),allocatable :: ddist_mm, rdsgi, uci, tsci0, ddk, sum_f, wfk
+  real(8),dimension(:,:,:),allocatable :: p_m, p_t, dm_d
+  real(8),dimension(:,:,:,:),allocatable :: p_d
+end module mix
+```
+
+| 変数名 | 意味 |
+|--------|------|
+| `tausta` | 無次元掃流力 |
+| `usta` | 摩擦速度 |
+| `vti` | 流速の絶対値 |
+| `us_bed`, `un_bed` | 河床近傍の流速 |
+| `dex`, `dey`, `de` | 河床変動量 |
+| `qbx_ttl`, `qby_ttl` | 掃流砂量の合計 |
+| `de_vol` | 河床変動量の体積 |
+| `j_mix` | 混合粒径モデルのフラグ |
+| `nk` | 粒径階層の数 |
+| `nb` | 各セルの堆積層の数 |
+| `e_d` | 堆積層厚 |
+| `e_thick` | 移動層厚 |
+| `e_m` | 交換層厚 |
+| `ddk` | 各粒径サイズ |
+| `p_m`, `p_t`, `p_d` | 交換層、遷移層、堆積層の各粒径の存在率 |
+
+## 乱流モデル関連
+
+```fortran
+module common_cmsnu
+  implicit none
+  real(8),dimension(:,:),allocatable :: snu, snu_x, snu0, snu0_x, snuk, snuk_x
+end module common_cmsnu
+
+module common_cmkep
+  implicit none
+  real(8),dimension(:,:),allocatable :: ph, pkv, pev, strain
+end module common_cmkep
+```
+
+| 変数名 | 意味 |
+|--------|------|
+| `snu` | 渦動粘性係数（セル中央） |
+| `snu_x` | 渦動粘性係数（格子点） |
+| `snu0` | 基準渦動粘性係数 |
+| `ph`, `pkv`, `pev` | k-εモデルの生成項 |
+| `strain` | ひずみ速度 |
+
+## 植生・構造物関連
+
+```fortran
+module common_cmcf
+  implicit none
+  real(8),dimension(:,:),allocatable :: cf, re, cd_veg, vege_el, vege_h
+end module common_cmcf
+```
+
+| 変数名 | 意味 |
+|--------|------|
+| `cf` | 河床抵抗係数 |
+| `re` | レイノルズ数 |
+| `cd_veg` | 植生の抵抗係数 |
+| `vege_el` | 植生の高さ |
+| `vege_h` | 植生の水没深さ |
+
+## 境界条件関連
+
+```fortran
+real(8),dimension(:),allocatable :: t_hyd, q_ups, h_ups, h_dse
+real(8),dimension(:),allocatable :: q_ups_t, h_ups_t
+```
+
+| 変数名 | 意味 |
+|--------|------|
+| `t_hyd` | 時系列データの時間 |
+| `q_ups` | 上流端の流量 |
+| `h_ups` | 上流端の水位 |
+| `h_dse` | 下流端の水位 |
+| `q_ups_t` | 支川の上流端流量 |
+| `h_ups_t` | 支川の上流端水位 |
+
+## その他の重要なパラメータ
+
+| 変数名 | 意味 |
+|--------|------|
+| `j_qbqs` | 河床変動計算のモード（0: 掃流砂のみ、1: 掃流砂+浮遊砂） |
+| `j_bedload` | 掃流砂公式の選択（0: MPM式、1: 芦田・道上式） |
+| `j_qsu` | 浮上量公式の選択 |
+| `j_snu` | 渦動粘性係数の計算方法 |
+| `j_flow` | 初期水位の設定方法 |
+| `j_wl` | 下流端水位の設定方法 |
+| `bheight` | 河岸高さ |
+| `slope` | 河床勾配 |
+| `diam` | 砂礫の粒径 |
+| `tantc` | 限界斜面勾配の接線 |
+
+これらの変数は、Nays2DHの計算において重要な役割を果たします。適切な設定と理解が、シミュレーション結果の精度と信頼性に直結します。 

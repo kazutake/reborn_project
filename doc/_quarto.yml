@@ -1,0 +1,31 @@
+﻿project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Nays2DHモデル技術解説書"
+  author: "Nays2DH開発チーム"
+  date: "2024/7/10"
+  chapters:
+    - index.qmd
+    - part: "1. 基礎式"
+      chapters:
+        - flow_equations.qmd
+        - flow_roughness.qmd
+        - sediment_equations.qmd
+        - sediment_mixed.qmd
+    - part: "3. プログラム説明"
+      chapters:
+        - program_variables.qmd
+        - program_subroutines.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+lang: ja 

@@ -1,0 +1,71 @@
+﻿# 流れの基礎式
+
+## 浅水流方程式
+
+Nays2DHでは、水深積分された二次元浅水流方程式を用いて流れの計算を行います。基礎方程式は以下の通りです。
+
+### 連続式
+$$
+\frac{\partial h}{\partial t} + \frac{\partial (hu)}{\partial x} + \frac{\partial (hv)}{\partial y} = 0
+$$
+
+ここで、$h$は水深、$u$と$v$は$x$方向と$y$方向の水深平均流速、$t$は時間です。
+
+### 運動量式
+
+$$
+\begin{align}
+\frac{\partial u}{\partial t} + u\frac{\partial u}{\partial x} + v\frac{\partial u}{\partial y} &= -g\frac{\partial H}{\partial x} + \nu_t \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right) - \frac{\tau_x}{\rho h} + F_x \\
+\frac{\partial v}{\partial t} + u\frac{\partial v}{\partial x} + v\frac{\partial v}{\partial y} &= -g\frac{\partial H}{\partial y} + \nu_t \left( \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} \right) - \frac{\tau_y}{\rho h} + F_y
+\end{align}
+$$
+
+ここで、$g$は重力加速度、$H$は水位、$\nu_t$は渦動粘性係数、$\tau_x$と$\tau_y$は底面せん断応力の$x$方向と$y$方向成分、$\rho$は水の密度、$F_x$と$F_y$は外力項（構造物や植生による抵抗など）です。
+
+## 座標変換
+
+Nays2DHでは、一般曲線座標系（$\xi$-$\eta$座標系）を用いて地形の複雑さに対応しています。基礎方程式は以下のように変換されます。
+
+### 連続式（一般曲線座標系）
+$$
+\frac{\partial h}{\partial t} + \frac{1}{J}\left[\frac{\partial}{\partial \xi}(hU) + \frac{\partial}{\partial \eta}(hV)\right] = 0
+$$
+
+### 運動量式（一般曲線座標系）
+$$
+\begin{align}
+\frac{\partial u}{\partial t} + \frac{U}{J}\frac{\partial u}{\partial \xi} + \frac{V}{J}\frac{\partial u}{\partial \eta} &= -g\left(\alpha_{11}\frac{\partial H}{\partial \xi} + \alpha_{12}\frac{\partial H}{\partial \eta}\right) + \text{(粘性項)} - \frac{\tau_x}{\rho h} + F_x \\
+\frac{\partial v}{\partial t} + \frac{U}{J}\frac{\partial v}{\partial \xi} + \frac{V}{J}\frac{\partial v}{\partial \eta} &= -g\left(\alpha_{21}\frac{\partial H}{\partial \xi} + \alpha_{22}\frac{\partial H}{\partial \eta}\right) + \text{(粘性項)} - \frac{\tau_y}{\rho h} + F_y
+\end{align}
+$$
+
+ここで、$J$はヤコビアン、$U$と$V$は反変速度成分、$\alpha_{ij}$は計量テンソルの成分です。
+
+## 底面せん断応力
+
+底面せん断応力は以下のように計算されます。
+
+$$
+\begin{align}
+\tau_x &= \rho C_f u \sqrt{u^2 + v^2} \\
+\tau_y &= \rho C_f v \sqrt{u^2 + v^2}
+\end{align}
+$$
+
+ここで、$C_f$は底面摩擦係数であり、Manning則を用いて以下のように表されます。
+
+$$
+C_f = \frac{gn^2}{h^{1/3}}
+$$
+
+$n$はManningの粗度係数です。
+
+## 数値解法
+
+Nays2DHでは、浅水流方程式を解くために以下の数値解法を用いています。
+
+1. 空間離散化：有限差分法
+2. 時間積分：陽的スキーム（リープフロッグ法）
+3. 移流項：風上差分法
+
+これらの手法により、安定かつ高精度な流れの計算が実現されています。 

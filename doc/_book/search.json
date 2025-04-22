@@ -1,0 +1,392 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Nays2DHモデル技術解説書",
+    "section": "",
+    "text": "まえがき\nNays2DHは、複雑な河川地形における水流と河床変動を計算するための二次元水理計算モデルです。本解説書では、Nays2DHの理論的基礎、数値計算手法、プログラム構造について詳細に解説します。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>モデルの概要</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#モデルの概要",
+    "href": "index.html#モデルの概要",
+    "title": "Nays2DHモデル技術解説書",
+    "section": "0.1 モデルの概要",
+    "text": "0.1 モデルの概要\nNays2DHは以下の特徴を持つ数値計算モデルです：\n\n浅水流方程式に基づく二次元平面流計算\n非構造格子による複雑地形への適用\n河床変動計算（掃流砂・浮遊砂）\n混合粒径の取り扱い\n植生・構造物の影響評価",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>モデルの概要</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#開発の経緯",
+    "href": "index.html#開発の経緯",
+    "title": "Nays2DHモデル技術解説書",
+    "section": "0.2 開発の経緯",
+    "text": "0.2 開発の経緯\nNays2DHは北海道大学と京都大学の研究者によって開発され、iRICソフトウェアのソルバーとして実装されています。河川工学の研究・実務への適用を目的として継続的に改良されています。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>モデルの概要</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#解説書の構成",
+    "href": "index.html#解説書の構成",
+    "title": "Nays2DHモデル技術解説書",
+    "section": "0.3 解説書の構成",
+    "text": "0.3 解説書の構成\n本解説書は以下の構成となっています：\n\n基礎式：モデルの理論的基盤となる基礎方程式の解説\n境界条件：計算領域の境界における条件設定\nプログラム説明：変数、サブルーチン、詳細実装の解説",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>モデルの概要</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#謝辞",
+    "href": "index.html#謝辞",
+    "title": "Nays2DHモデル技術解説書",
+    "section": "謝辞",
+    "text": "謝辞\nこのモデルの開発に携わったすべての研究者・技術者に感謝します。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>モデルの概要</span>"
+    ]
+  },
+  {
+    "objectID": "flow_equations.html",
+    "href": "flow_equations.html",
+    "title": "2  浅水流方程式",
+    "section": "",
+    "text": "3 流れの基礎式\nNays2DHでは、水深積分された二次元浅水流方程式を用いて流れの計算を行います。基礎方程式は以下の通りです。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>浅水流方程式</span>"
+    ]
+  },
+  {
+    "objectID": "flow_equations.html#座標変換",
+    "href": "flow_equations.html#座標変換",
+    "title": "2  浅水流方程式",
+    "section": "3.1 座標変換",
+    "text": "3.1 座標変換\nNays2DHでは、一般曲線座標系（\\(\\xi\\)-\\(\\eta\\)座標系）を用いて地形の複雑さに対応しています。基礎方程式は以下のように変換されます。\n\n3.1.1 連続式（一般曲線座標系）\n\\[\n\\frac{\\partial h}{\\partial t} + \\frac{1}{J}\\left[\\frac{\\partial}{\\partial \\xi}(hU) + \\frac{\\partial}{\\partial \\eta}(hV)\\right] = 0\n\\]\n\n\n3.1.2 運動量式（一般曲線座標系）\n\\[\n\\begin{align}\n\\frac{\\partial u}{\\partial t} + \\frac{U}{J}\\frac{\\partial u}{\\partial \\xi} + \\frac{V}{J}\\frac{\\partial u}{\\partial \\eta} &= -g\\left(\\alpha_{11}\\frac{\\partial H}{\\partial \\xi} + \\alpha_{12}\\frac{\\partial H}{\\partial \\eta}\\right) + \\text{(粘性項)} - \\frac{\\tau_x}{\\rho h} + F_x \\\\\n\\frac{\\partial v}{\\partial t} + \\frac{U}{J}\\frac{\\partial v}{\\partial \\xi} + \\frac{V}{J}\\frac{\\partial v}{\\partial \\eta} &= -g\\left(\\alpha_{21}\\frac{\\partial H}{\\partial \\xi} + \\alpha_{22}\\frac{\\partial H}{\\partial \\eta}\\right) + \\text{(粘性項)} - \\frac{\\tau_y}{\\rho h} + F_y\n\\end{align}\n\\]\nここで、\\(J\\)はヤコビアン、\\(U\\)と\\(V\\)は反変速度成分、\\(\\alpha_{ij}\\)は計量テンソルの成分です。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>浅水流方程式</span>"
+    ]
+  },
+  {
+    "objectID": "flow_equations.html#底面せん断応力",
+    "href": "flow_equations.html#底面せん断応力",
+    "title": "2  浅水流方程式",
+    "section": "3.2 底面せん断応力",
+    "text": "3.2 底面せん断応力\n底面せん断応力は以下のように計算されます。\n\\[\n\\begin{align}\n\\tau_x &= \\rho C_f u \\sqrt{u^2 + v^2} \\\\\n\\tau_y &= \\rho C_f v \\sqrt{u^2 + v^2}\n\\end{align}\n\\]\nここで、\\(C_f\\)は底面摩擦係数であり、Manning則を用いて以下のように表されます。\n\\[\nC_f = \\frac{gn^2}{h^{1/3}}\n\\]\n\\(n\\)はManningの粗度係数です。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>浅水流方程式</span>"
+    ]
+  },
+  {
+    "objectID": "flow_equations.html#数値解法",
+    "href": "flow_equations.html#数値解法",
+    "title": "2  浅水流方程式",
+    "section": "3.3 数値解法",
+    "text": "3.3 数値解法\nNays2DHでは、浅水流方程式を解くために以下の数値解法を用いています。\n\n空間離散化：有限差分法\n時間積分：陽的スキーム（リープフロッグ法）\n移流項：風上差分法\n\nこれらの手法により、安定かつ高精度な流れの計算が実現されています。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>浅水流方程式</span>"
+    ]
+  },
+  {
+    "objectID": "flow_roughness.html",
+    "href": "flow_roughness.html",
+    "title": "3  Manningの粗度係数",
+    "section": "",
+    "text": "4 底面粗度\n底面粗度は、河床と水流の間の摩擦を表現するもので、Nays2DHのモデルにおいて流れの計算に重要な役割を果たします。\nNays2DHでは、底面粗度の表現にManningの粗度係数\\(n\\)を使用しています。底面せん断応力\\(\\tau_0\\)は次式で表されます。\n\\[\n\\tau_0 = \\rho C_f (u^2 + v^2)\n\\]\nここで底面摩擦係数\\(C_f\\)は、Manningの粗度係数\\(n\\)を用いて次のように表されます。\n\\[\nC_f = \\frac{gn^2}{h^{1/3}}\n\\]\nここで、\\(g\\)は重力加速度、\\(h\\)は水深です。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Manningの粗度係数</span>"
+    ]
+  },
+  {
+    "objectID": "flow_roughness.html#コードにおける実装",
+    "href": "flow_roughness.html#コードにおける実装",
+    "title": "3  Manningの粗度係数",
+    "section": "4.1 コードにおける実装",
+    "text": "4.1 コードにおける実装\nNays2DHのコードでは、以下のように粗度係数が設定され、底面摩擦が計算されています。\ndo j=1,ny\n  do i=1,nx\n    snmm(i,j)=roughness4(i,j)\n    if(snmm(i,j)&lt;=0.d0) then\n      write(*,'(a30,i5,a1,i5,a4,f10.3)') &\n        'Manning roughness coefficient(',i,',',j,') is',snmm(i,j)\n      write(*,*) 'This coefficient should be larger than 0'\n      stop\n    end if\n  end do\nend do\nまた、底面摩擦係数と底面せん断応力は以下のように計算されます。\ncf(i,j) = g * snmm(i,j)**2 / hs(i,j)**(1.d0/3.d0)\nusta(i,j) = cf(i,j)**0.5d0*vti(i,j)\ntausta(i,j) = usta(i,j)**2.d0/(spec*g*diam)",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Manningの粗度係数</span>"
+    ]
+  },
+  {
+    "objectID": "flow_roughness.html#粗度設定の考慮事項",
+    "href": "flow_roughness.html#粗度設定の考慮事項",
+    "title": "3  Manningの粗度係数",
+    "section": "4.2 粗度設定の考慮事項",
+    "text": "4.2 粗度設定の考慮事項\n実際の河川地形における適切な粗度係数の設定は重要な課題です。粗度係数は以下の要因により変化します。\n\n河床材料: 砂礫の大きさや分布\n河床形状: 砂堆や砂州の存在\n植生状態: 水草や河畔林の影響\n河川の蛇行度: 断面形状の複雑さ\n\n\n4.2.1 粗度係数の推定\n実際の河川において粗度係数を推定する方法としては、以下のアプローチがあります。\n\n既往文献の参照値: 河川の種類や特性に応じた一般的な値\n実測データからの逆算: 水位・流量観測データからの逆算\n経験式による推定: 河床材料の粒径などから推定\n\n\n\n4.2.2 代表的な粗度係数の値\n\n\n\n河川の状態\nManningの粗度係数 \\(n\\)\n\n\n\n\n滑らかな河床\n0.020 - 0.035\n\n\n砂利河床\n0.030 - 0.050\n\n\n植生のある河床\n0.035 - 0.070\n\n\n岩盤河床\n0.025 - 0.045",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Manningの粗度係数</span>"
+    ]
+  },
+  {
+    "objectID": "flow_roughness.html#空間分布の表現",
+    "href": "flow_roughness.html#空間分布の表現",
+    "title": "3  Manningの粗度係数",
+    "section": "4.3 空間分布の表現",
+    "text": "4.3 空間分布の表現\nNays2DHでは、計算領域内の各格子点において異なる粗度係数を設定することが可能です。これにより、河川の縦断方向・横断方向の粗度変化を考慮した詳細な計算が可能になります。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Manningの粗度係数</span>"
+    ]
+  },
+  {
+    "objectID": "sediment_equations.html",
+    "href": "sediment_equations.html",
+    "title": "4  連続式（Exner方程式）",
+    "section": "",
+    "text": "5 河床変動の基礎式\nNays2DHでは、流れの計算と連携して河床変動計算を行います。本章では河床変動計算の基礎式について解説します。\n河床変動の基本方程式は、次の連続式（Exner方程式）で表されます。\n\\[\n\\frac{\\partial z_b}{\\partial t} + \\frac{1}{1-\\lambda} \\left( \\frac{\\partial q_{bx}}{\\partial x} + \\frac{\\partial q_{by}}{\\partial y} \\right) = 0\n\\]\nここで、\\(z_b\\)は河床高さ、\\(\\lambda\\)は河床材料の空隙率、\\(q_{bx}\\)と\\(q_{by}\\)はそれぞれ\\(x\\)方向と\\(y\\)方向の単位幅当たりの掃流砂量です。\n浮遊砂を考慮する場合は、以下のように修正されます。\n\\[\n\\frac{\\partial z_b}{\\partial t} + \\frac{1}{1-\\lambda} \\left[ \\left( \\frac{\\partial q_{bx}}{\\partial x} + \\frac{\\partial q_{by}}{\\partial y} \\right) + (E - D) \\right] = 0\n\\]\nここで、\\(E\\)は浮上量（pickup rate）、\\(D\\)は沈降量（deposition rate）です。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>連続式（Exner方程式）</span>"
+    ]
+  },
+  {
+    "objectID": "sediment_equations.html#河床せん断応力と無次元パラメータ",
+    "href": "sediment_equations.html#河床せん断応力と無次元パラメータ",
+    "title": "4  連続式（Exner方程式）",
+    "section": "5.1 河床せん断応力と無次元パラメータ",
+    "text": "5.1 河床せん断応力と無次元パラメータ\n掃流砂量を計算するためには、河床せん断応力を評価する必要があります。河床せん断応力は以下の式で与えられます。\n\\[\n\\tau_0 = \\rho C_f (u^2 + v^2)\n\\]\n通常、無次元河床せん断応力（Shields数）\\(\\tau_*\\)が使用されます。\n\\[\n\\tau_* = \\frac{\\tau_0}{\\rho_s g d (\\sigma/\\rho - 1)}\n\\]\nここで、\\(\\rho_s\\)は砂礫の密度、\\(d\\)は砂礫の粒径、\\(\\sigma\\)は砂礫の密度、\\(\\rho\\)は水の密度です。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>連続式（Exner方程式）</span>"
+    ]
+  },
+  {
+    "objectID": "sediment_equations.html#掃流砂量式",
+    "href": "sediment_equations.html#掃流砂量式",
+    "title": "4  連続式（Exner方程式）",
+    "section": "5.2 掃流砂量式",
+    "text": "5.2 掃流砂量式\nNays2DHでは、複数の掃流砂量式が実装されています。代表的なものとして以下の式があります。\n\n5.2.1 MPM公式（Meyer-Peter and M?ller）\n\\[\nq_b^* = 8(\\tau_* - \\tau_{*c})^{3/2}\n\\]\n\n\n5.2.2 芦田・道上公式\n\\[\nq_b^* = 17\\tau_*^{3/2}(1 - \\frac{\\tau_{*c}}{\\tau_*})(1 - \\frac{u_{*c}}{u_*})\n\\]\nここで、\\(q_b^*\\)は無次元掃流砂量、\\(\\tau_{*c}\\)は無次元限界掃流力、\\(u_{*c}\\)は限界摩擦速度、\\(u_*\\)は摩擦速度です。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>連続式（Exner方程式）</span>"
+    ]
+  },
+  {
+    "objectID": "sediment_equations.html#浮遊砂の支配方程式",
+    "href": "sediment_equations.html#浮遊砂の支配方程式",
+    "title": "4  連続式（Exner方程式）",
+    "section": "5.3 浮遊砂の支配方程式",
+    "text": "5.3 浮遊砂の支配方程式\n浮遊砂は、以下の移流拡散方程式で計算されます。\n\\[\n\\frac{\\partial (hC)}{\\partial t} + \\frac{\\partial (huC)}{\\partial x} + \\frac{\\partial (hvC)}{\\partial y} = \\frac{\\partial}{\\partial x}\\left(h\\varepsilon_x\\frac{\\partial C}{\\partial x}\\right) + \\frac{\\partial}{\\partial y}\\left(h\\varepsilon_y\\frac{\\partial C}{\\partial y}\\right) + E - D\n\\]\nここで、\\(C\\)は浮遊砂濃度、\\(\\varepsilon_x\\)と\\(\\varepsilon_y\\)はそれぞれ\\(x\\)方向と\\(y\\)方向の拡散係数です。\n浮上量と沈降量は以下のように定義されます。\n\\[\n\\begin{align}\nE &= w_0 C_a \\\\\nD &= w_0 C\n\\end{align}\n\\]\nここで、\\(w_0\\)は砂礫の沈降速度、\\(C_a\\)は基準面濃度です。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>連続式（Exner方程式）</span>"
+    ]
+  },
+  {
+    "objectID": "sediment_equations.html#数値解法",
+    "href": "sediment_equations.html#数値解法",
+    "title": "4  連続式（Exner方程式）",
+    "section": "5.4 数値解法",
+    "text": "5.4 数値解法\n河床変動計算の数値解法は以下の通りです。\n\n流れの計算から底面せん断応力を求める\n掃流砂量と浮遊砂濃度を計算する\nExner方程式を解いて河床変動量を求める\n更新された河床高を用いて流れの計算を行う\n\nこの一連の計算を繰り返すことで、流れと河床変動の相互作用を考慮した計算が可能になります。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>連続式（Exner方程式）</span>"
+    ]
+  },
+  {
+    "objectID": "sediment_mixed.html",
+    "href": "sediment_mixed.html",
+    "title": "5  混合粒径モデルの概要",
+    "section": "",
+    "text": "6 混合粒径モデル\n実際の河川では、様々な粒径の砂礫が混在しています。Nays2DHでは、この混合粒径の効果を考慮するモデルが実装されています。\nNays2DHの混合粒径モデルでは、河床材料を複数の粒径階層に区分し、それぞれの粒径階層ごとに掃流砂量や浮遊砂濃度を計算します。各粒径階層の存在比率は、計算の進行に伴って変化します。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>混合粒径モデルの概要</span>"
+    ]
+  },
+  {
+    "objectID": "sediment_mixed.html#河床材料の層構造",
+    "href": "sediment_mixed.html#河床材料の層構造",
+    "title": "5  混合粒径モデルの概要",
+    "section": "6.1 河床材料の層構造",
+    "text": "6.1 河床材料の層構造\n混合粒径モデルでは、河床材料を以下の3つの層に分けて表現します。\n\n交換層（Exchange Layer）: 河床表面の薄い層で、流れと直接相互作用する層\n遷移層（Transition Layer）: 交換層と堆積層の間の中間層\n堆積層（Deposited Layer）: 下部の堆積物層（複数の層に分けることが可能）\n\nコード内の定義は以下の通りです：\n! e_d: 堆積層厚、e_thick: 移動層厚、e_m: 交換層厚\nreal(8) :: e_d, e_thick, e_m\n! p_m, p_t, p_d: 交換層、遷移層、堆積層の各粒径の存在率\nreal(8),dimension(:,:,:),allocatable :: p_m, p_t, p_d",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>混合粒径モデルの概要</span>"
+    ]
+  },
+  {
+    "objectID": "sediment_mixed.html#遮蔽効果hiding-effect",
+    "href": "sediment_mixed.html#遮蔽効果hiding-effect",
+    "title": "5  混合粒径モデルの概要",
+    "section": "6.2 遮蔽効果（Hiding Effect）",
+    "text": "6.2 遮蔽効果（Hiding Effect）\n混合粒径河床では、小さな粒径の砂礫が大きな粒径の砂礫によって遮蔽される効果があります。Nays2DHでは、この遮蔽効果を以下の式で考慮しています。\n\\[\n\\tau_{*ck} = \\tau_{*cm} \\left( \\frac{d_k}{d_m} \\right)^{-\\beta}\n\\]\nここで、\\(\\tau_{*ck}\\)は粒径\\(d_k\\)の砂礫の無次元限界掃流力、\\(\\tau_{*cm}\\)は平均粒径\\(d_m\\)に対する無次元限界掃流力、\\(\\beta\\)は遮蔽効果のパラメータ（通常0.6?0.9）です。\nコードでの実装は以下の通りです：\ndo k=1,nk\n  usck(i,j,k) = usc_m*ddk(k)**xi_ega\n  tsck(i,j,k) = usck(i,j,k)**2.d0/(spec*g*ddk(k))\nend do",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>混合粒径モデルの概要</span>"
+    ]
+  },
+  {
+    "objectID": "sediment_mixed.html#各粒径階層の掃流砂量計算",
+    "href": "sediment_mixed.html#各粒径階層の掃流砂量計算",
+    "title": "5  混合粒径モデルの概要",
+    "section": "6.3 各粒径階層の掃流砂量計算",
+    "text": "6.3 各粒径階層の掃流砂量計算\n各粒径階層\\(k\\)の掃流砂量\\(q_{bk}\\)は、その粒径の存在比率\\(p_k\\)と無次元掃流力に基づいて計算されます。\n\\[\nq_{bk} = p_k \\cdot q_b(d_k, \\tau_{*k}, \\tau_{*ck})\n\\]\nここで、\\(q_b\\)は掃流砂量式（MPM式や芦田・道上式など）です。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>混合粒径モデルの概要</span>"
+    ]
+  },
+  {
+    "objectID": "sediment_mixed.html#交換層の粒度分布更新",
+    "href": "sediment_mixed.html#交換層の粒度分布更新",
+    "title": "5  混合粒径モデルの概要",
+    "section": "6.4 交換層の粒度分布更新",
+    "text": "6.4 交換層の粒度分布更新\n河床変動に伴い、交換層の粒度分布は以下のような過程で更新されます。\n\n各粒径階層の侵食・堆積量を計算\n交換層の厚さ変化を計算\n遷移層との交換を考慮して粒度分布を更新\n\nコードでの実装は以下のようになっています：\nemb_new = emb(i,j)+dex(i,j)\nnb_new = 0\n\nif( emb_new&gt;e_m ) then\n  e_t_new = emb_new-e_m\n  emb_new = e_m\n  \n  do k=1,nk\n    p_m_new(k) = p_m(i,j,k)*(emb(i,j)-e_t_new)/emb_new+dex_mix(i,j,k)/emb_new\n    p_t_new(k) = p_m(i,j,k)\n    p_d_new(k) = p_t_new(k)  ! ダミー\n  end do\nelse if( emb_new&lt;=0.d0 ) then\n  e_t_new = 0.d0\n  \n  do k=1,nk\n    p_m_new(k) = 0.d0\n    p_t_new(k) = p_m_new(k)  ! ダミー\n    p_d_new(k) = p_t_new(k)  ! ダミー\n  end do\nelse\n  e_t_new = 0.d0\n  \n  do k=1,nk\n    p_m_new(k) = (emb(i,j)*p_m(i,j,k)+dex_mix(i,j,k))/emb_new\n    p_t_new(k) = p_m_new(k)  ! ダミー\n    p_d_new(k) = p_t_new(k)  ! ダミー\n  end do\nend if",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>混合粒径モデルの概要</span>"
+    ]
+  },
+  {
+    "objectID": "sediment_mixed.html#混合粒径による浮遊砂計算",
+    "href": "sediment_mixed.html#混合粒径による浮遊砂計算",
+    "title": "5  混合粒径モデルの概要",
+    "section": "6.5 混合粒径による浮遊砂計算",
+    "text": "6.5 混合粒径による浮遊砂計算\n混合粒径モデルでは、各粒径階層ごとに異なる浮遊砂濃度\\(C_k\\)が計算されます。それぞれの粒径は異なる沈降速度\\(w_{0k}\\)を持ち、これが浮遊砂の挙動に影響します。\n浮遊砂の計算式は以下のようになります：\n\\[\n\\frac{\\partial (hC_k)}{\\partial t} + \\frac{\\partial (huC_k)}{\\partial x} + \\frac{\\partial (hvC_k)}{\\partial y} = \\frac{\\partial}{\\partial x}\\left(h\\varepsilon_x\\frac{\\partial C_k}{\\partial x}\\right) + \\frac{\\partial}{\\partial y}\\left(h\\varepsilon_y\\frac{\\partial C_k}{\\partial y}\\right) + E_k - D_k\n\\]\nここで、添え字\\(k\\)は粒径階層を表します。",
+    "crumbs": [
+      "1. 基礎式",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>混合粒径モデルの概要</span>"
+    ]
+  },
+  {
+    "objectID": "program_variables.html",
+    "href": "program_variables.html",
+    "title": "6  基本変数",
+    "section": "",
+    "text": "7 変数一覧\nNays2DHプログラムで使用される主要な変数について説明します。これらの変数は各モジュールで定義され、プログラム全体で共有されています。",
+    "crumbs": [
+      "3. プログラム説明",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>基本変数</span>"
+    ]
+  },
+  {
+    "objectID": "program_variables.html#座標系関連",
+    "href": "program_variables.html#座標系関連",
+    "title": "6  基本変数",
+    "section": "7.1 座標系関連",
+    "text": "7.1 座標系関連\nmodule common_cmxy\n  implicit none\n  real(8),dimension(:,:),allocatable :: x, y\n  real(8),dimension(:,:),allocatable :: dn, ds\n  real(8),dimension(:,:),allocatable :: eta, eta_init, z0\n  real(8),dimension(:),allocatable :: s_center, s_center_t, s_center_t2\nend module common_cmxy\n\n\n\n変数名\n意味\n\n\n\n\nx, y\n計算格子の座標\n\n\ndn, ds\n格子間隔\n\n\neta\n河床高さ\n\n\neta_init\n初期河床高さ\n\n\nz0\n基準面高さ\n\n\ns_center\n中心線長さ",
+    "crumbs": [
+      "3. プログラム説明",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>基本変数</span>"
+    ]
+  },
+  {
+    "objectID": "program_variables.html#流れ関連",
+    "href": "program_variables.html#流れ関連",
+    "title": "6  基本変数",
+    "section": "7.2 流れ関連",
+    "text": "7.2 流れ関連\nmodule common_cmuv\n  implicit none\n  real(8),dimension(:,:),allocatable :: yu, yv\n  real(8),dimension(:,:),allocatable :: yun, yvn\nend module common_cmuv\n\nmodule common_cmhq\n  implicit none\n  real(8),dimension(:,:),allocatable :: h, hs\n  real(8),dimension(:,:),allocatable :: q_xi, q_et\nend module common_cmhq\n\n\n\n変数名\n意味\n\n\n\n\nyu, yv\n\\(x\\)方向、\\(y\\)方向の流速\n\n\nyun, yvn\n次のステップの流速\n\n\nh\n水位\n\n\nhs\n水深\n\n\nq_xi, q_et\n\\(\\xi\\)方向、\\(\\eta\\)方向の流量",
+    "crumbs": [
+      "3. プログラム説明",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>基本変数</span>"
+    ]
+  },
+  {
+    "objectID": "program_variables.html#河床変動関連",
+    "href": "program_variables.html#河床変動関連",
+    "title": "6  基本変数",
+    "section": "7.3 河床変動関連",
+    "text": "7.3 河床変動関連\nmodule common_cmtst\n  implicit none\n  real(8),dimension(:,:),allocatable :: tausta, usta, vti\n  real(8),dimension(:,:),allocatable :: us_bed, un_bed\nend module common_cmtst\n\nmodule common_cmsui\n  implicit none\n  real(8),dimension(:,:),allocatable :: dex, dey, de\n  real(8),dimension(:),allocatable :: qbx_ttl, qby_ttl, de_vol\nend module common_cmsui\n\nmodule mix\n  implicit none\n  integer :: j_mix, nk, nm\n  integer,dimension(:,:),allocatable :: nb, flg_mix\n  real(8) :: e_d, e_thick, e_m\n  real(8),dimension(:),allocatable :: ddist_mm, rdsgi, uci, tsci0, ddk, sum_f, wfk\n  real(8),dimension(:,:,:),allocatable :: p_m, p_t, dm_d\n  real(8),dimension(:,:,:,:),allocatable :: p_d\nend module mix\n\n\n\n変数名\n意味\n\n\n\n\ntausta\n無次元掃流力\n\n\nusta\n摩擦速度\n\n\nvti\n流速の絶対値\n\n\nus_bed, un_bed\n河床近傍の流速\n\n\ndex, dey, de\n河床変動量\n\n\nqbx_ttl, qby_ttl\n掃流砂量の合計\n\n\nde_vol\n河床変動量の体積\n\n\nj_mix\n混合粒径モデルのフラグ\n\n\nnk\n粒径階層の数\n\n\nnb\n各セルの堆積層の数\n\n\ne_d\n堆積層厚\n\n\ne_thick\n移動層厚\n\n\ne_m\n交換層厚\n\n\nddk\n各粒径サイズ\n\n\np_m, p_t, p_d\n交換層、遷移層、堆積層の各粒径の存在率",
+    "crumbs": [
+      "3. プログラム説明",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>基本変数</span>"
+    ]
+  },
+  {
+    "objectID": "program_variables.html#乱流モデル関連",
+    "href": "program_variables.html#乱流モデル関連",
+    "title": "6  基本変数",
+    "section": "7.4 乱流モデル関連",
+    "text": "7.4 乱流モデル関連\nmodule common_cmsnu\n  implicit none\n  real(8),dimension(:,:),allocatable :: snu, snu_x, snu0, snu0_x, snuk, snuk_x\nend module common_cmsnu\n\nmodule common_cmkep\n  implicit none\n  real(8),dimension(:,:),allocatable :: ph, pkv, pev, strain\nend module common_cmkep\n\n\n\n変数名\n意味\n\n\n\n\nsnu\n渦動粘性係数（セル中央）\n\n\nsnu_x\n渦動粘性係数（格子点）\n\n\nsnu0\n基準渦動粘性係数\n\n\nph, pkv, pev\nk-εモデルの生成項\n\n\nstrain\nひずみ速度",
+    "crumbs": [
+      "3. プログラム説明",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>基本変数</span>"
+    ]
+  },
+  {
+    "objectID": "program_variables.html#植生構造物関連",
+    "href": "program_variables.html#植生構造物関連",
+    "title": "6  基本変数",
+    "section": "7.5 植生・構造物関連",
+    "text": "7.5 植生・構造物関連\nmodule common_cmcf\n  implicit none\n  real(8),dimension(:,:),allocatable :: cf, re, cd_veg, vege_el, vege_h\nend module common_cmcf\n\n\n\n変数名\n意味\n\n\n\n\ncf\n河床抵抗係数\n\n\nre\nレイノルズ数\n\n\ncd_veg\n植生の抵抗係数\n\n\nvege_el\n植生の高さ\n\n\nvege_h\n植生の水没深さ",
+    "crumbs": [
+      "3. プログラム説明",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>基本変数</span>"
+    ]
+  },
+  {
+    "objectID": "program_variables.html#境界条件関連",
+    "href": "program_variables.html#境界条件関連",
+    "title": "6  基本変数",
+    "section": "7.6 境界条件関連",
+    "text": "7.6 境界条件関連\nreal(8),dimension(:),allocatable :: t_hyd, q_ups, h_ups, h_dse\nreal(8),dimension(:),allocatable :: q_ups_t, h_ups_t\n\n\n\n変数名\n意味\n\n\n\n\nt_hyd\n時系列データの時間\n\n\nq_ups\n上流端の流量\n\n\nh_ups\n上流端の水位\n\n\nh_dse\n下流端の水位\n\n\nq_ups_t\n支川の上流端流量\n\n\nh_ups_t\n支川の上流端水位",
+    "crumbs": [
+      "3. プログラム説明",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>基本変数</span>"
+    ]
+  },
+  {
+    "objectID": "program_variables.html#その他の重要なパラメータ",
+    "href": "program_variables.html#その他の重要なパラメータ",
+    "title": "6  基本変数",
+    "section": "7.7 その他の重要なパラメータ",
+    "text": "7.7 その他の重要なパラメータ\n\n\n\n変数名\n意味\n\n\n\n\nj_qbqs\n河床変動計算のモード（0: 掃流砂のみ、1: 掃流砂+浮遊砂）\n\n\nj_bedload\n掃流砂公式の選択（0: MPM式、1: 芦田・道上式）\n\n\nj_qsu\n浮上量公式の選択\n\n\nj_snu\n渦動粘性係数の計算方法\n\n\nj_flow\n初期水位の設定方法\n\n\nj_wl\n下流端水位の設定方法\n\n\nbheight\n河岸高さ\n\n\nslope\n河床勾配\n\n\ndiam\n砂礫の粒径\n\n\ntantc\n限界斜面勾配の接線\n\n\n\nこれらの変数は、Nays2DHの計算において重要な役割を果たします。適切な設定と理解が、シミュレーション結果の精度と信頼性に直結します。",
+    "crumbs": [
+      "3. プログラム説明",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>基本変数</span>"
+    ]
+  },
+  {
+    "objectID": "program_subroutines.html",
+    "href": "program_subroutines.html",
+    "title": "7  主要モジュール",
+    "section": "",
+    "text": "8 サブルーチン一覧\nNays2DHプログラムは、多数のモジュールとサブルーチンから構成されています。本章では、主要なモジュールとサブルーチンの機能を概説します。",
+    "crumbs": [
+      "3. プログラム説明",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>主要モジュール</span>"
+    ]
+  },
+  {
+    "objectID": "program_subroutines.html#主要サブルーチン",
+    "href": "program_subroutines.html#主要サブルーチン",
+    "title": "7  主要モジュール",
+    "section": "8.1 主要サブルーチン",
+    "text": "8.1 主要サブルーチン\n\n8.1.1 初期化関連\nmodule initial_0_m\n  subroutine initial_01\n    ! 基本変数の初期化\n  end subroutine initial_01\n  \n  subroutine initial_02\n    ! 水理量の初期化\n  end subroutine initial_02\n  \n  subroutine initial_mix\n    ! 混合粒径関連変数の初期化\n  end subroutine initial_mix\nend module initial_0_m\n\n\n8.1.2 流れ計算関連\n\n\n\nサブルーチン名\n機能\n\n\n\n\nadvection\n移流項の計算\n\n\ndiffusion\n拡散項の計算\n\n\nsrcal\n二次流の計算\n\n\ntaucal\n底面せん断応力の計算\n\n\ntaustacal_uni\n均一粒径の底面せん断応力計算\n\n\ntaustacal_mix\n混合粒径の底面せん断応力計算\n\n\nndr\n乾燥セルの処理\n\n\nphical\n固定床の処理\n\n\n\n\n\n8.1.3 河床変動計算関連\n\n\n\nサブルーチン名\n機能\n\n\n\n\nqb_uni\n均一粒径の掃流砂量計算\n\n\nqb_mix\n混合粒径の掃流砂量計算\n\n\nqs_uni\n均一粒径の浮遊砂濃度計算\n\n\nc_transport_mix\n混合粒径の浮遊砂輸送計算\n\n\nusc\n限界摩擦速度の計算（岩垣式）\n\n\nsorting\n混合粒径の分級計算\n\n\nsorting_fixed\n固定床を考慮した分級計算\n\n\nwfcal\n沈降速度の計算\n\n\n\n\n\n8.1.4 境界条件関連\n\n\n\nサブルーチン名\n機能\n\n\n\n\nbound_u\n流速の境界条件設定\n\n\nbound_v\n流速の境界条件設定\n\n\nbound_h\n水位の境界条件設定\n\n\nbound_c\n濃度の境界条件設定\n\n\ngcoefs\n格子係数の計算\n\n\nhqtcal\n上流端水位・流量の計算\n\n\n\n\n\n8.1.5 河床形状関連\n\n\n\nサブルーチン名\n機能\n\n\n\n\navgeo\n河床地形の計算\n\n\nbkfill\n河岸の堆積計算\n\n\ncrossck\n交差判定\n\n\nfind1, find2, findits\n河岸ラインの探索\n\n\nkzahyo\n座標変換\n\n\nkouten\n交点計算\n\n\ns3n\nスプライン補間",
+    "crumbs": [
+      "3. プログラム説明",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>主要モジュール</span>"
+    ]
+  },
+  {
+    "objectID": "program_subroutines.html#プログラムの実行フロー",
+    "href": "program_subroutines.html#プログラムの実行フロー",
+    "title": "7  主要モジュール",
+    "section": "8.2 プログラムの実行フロー",
+    "text": "8.2 プログラムの実行フロー\nNays2DHプログラムの実行フローは以下の通りです。\n\n初期化\n\ninitial_01: 基本変数の初期化\ninitial_02: 水理量の初期化\ninitial_mix: 混合粒径関連変数の初期化（必要な場合）\ngcoefs: 格子係数の計算\ninitl: 初期水位・流速の設定\n\n時間ステップごとの計算\n\n流れの計算\n\nadvection: 移流項の計算\ndiffusion: 拡散項の計算\nsrcal: 二次流の計算\ntaustacal_uni/taustacal_mix: 底面せん断応力の計算\nbound_u, bound_v, bound_h: 境界条件の設定\nndr: 乾燥セルの処理\n\n河床変動計算（有効な場合）\n\nqb_uni/qb_mix: 掃流砂量の計算\nqs_uni/c_transport_mix: 浮遊砂の計算\nsorting/sorting_fixed: 分級計算\nbkfill: 河岸の堆積計算\n\n出力処理\n\n結果の出力\n可視化データの作成\n\n\n終了処理\n\n計算結果の保存\nリソースの解放\n\n\nこのようなフローで、Nays2DHは流れと河床変動の相互作用を考慮した計算を行います。",
+    "crumbs": [
+      "3. プログラム説明",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>主要モジュール</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "参考文献",
+    "section": "",
+    "text": "参考文献",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>references.html</span>"
+    ]
+  }
+]
