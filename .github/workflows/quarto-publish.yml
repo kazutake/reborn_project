@@ -39,11 +39,13 @@ jobs:
             exit 1
           fi
           echo "doc/_book ディレクトリが見つかりました。デプロイを続行します。"
+          ls -la ./doc/_book
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./doc/_book
+          artifact_name: github-pages
 
       - name: Deploy to GitHub Pages
         id: deployment
