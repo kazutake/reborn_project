@@ -3,8 +3,8 @@ name: Publish Book to GitHub Pages
 on:
   push:
     branches: main  # mainブランチへのプッシュでトリガー
-    paths:
-      - 'doc/_book/**'  # _bookディレクトリの変更があった場合のみ実行
+    # paths:
+    #   - 'doc/_book/**'  # _bookディレクトリの変更があった場合のみ実行
 
 # 必要な権限を定義
 permissions:
@@ -30,6 +30,14 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
+
+      - name: Check artifact existence
+        run: |
+          if [ ! -d "./doc/_book" ]; then
+            echo "Error: ./doc/_book directory not found. Please build the book locally first."
+            exit 1
+          fi
+          echo "Found ./doc/_book directory, proceeding with deployment."
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
