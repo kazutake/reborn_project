@@ -286,19 +286,19 @@ window.Quarto = {
 
 <section id="底面粗度" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> 底面粗度</h1>
-<p>底面粗度は、河床と水流の間の摩擦を表現するもので、Nays2DHのモデルにおいて流れの計算に重要な役割を果たします。</p>
-<p>Nays2DHでは、底面粗度の表現にManningの粗度係数<span class="math inline">\(n\)</span>を使用しています。底面せん断応力<span class="math inline">\(\tau_0\)</span>は次式で表されます。</p>
+<p>底面粗度は、河床と水流の間の摩擦を表現するもので、Nays2DHのモデルにおいて流れの計算に重要な役割を果たす。</p>
+<p>Nays2DHでは、底面粗度の表現にManningの粗度係数<span class="math inline">\(n\)</span>を使用している。底面せん断応力<span class="math inline">\(\tau_0\)</span>は次式で表される。</p>
 <p><span class="math display">\[
 \tau_0 = \rho C_f (u^2 + v^2)
 \]</span></p>
-<p>ここで底面摩擦係数<span class="math inline">\(C_f\)</span>は、Manningの粗度係数<span class="math inline">\(n\)</span>を用いて次のように表されます。</p>
+<p>ここで底面摩擦係数<span class="math inline">\(C_f\)</span>は、Manningの粗度係数<span class="math inline">\(n\)</span>を用いて次のように表される。</p>
 <p><span class="math display">\[
 C_f = \frac{gn^2}{h^{1/3}}
 \]</span></p>
-<p>ここで、<span class="math inline">\(g\)</span>は重力加速度、<span class="math inline">\(h\)</span>は水深です。</p>
+<p>ここで、<span class="math inline">\(g\)</span>は重力加速度、<span class="math inline">\(h\)</span>は水深である。</p>
 <section id="コードにおける実装" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="コードにおける実装"><span class="header-section-number">4.1</span> コードにおける実装</h2>
-<p>Nays2DHのコードでは、以下のように粗度係数が設定され、底面摩擦が計算されています。</p>
+<p>Nays2DHのコードでは、以下のように粗度係数が設定され、底面摩擦が計算されている。</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">do</span> j<span class="kw">=</span><span class="dv">1</span>,ny</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">do</span> i<span class="kw">=</span><span class="dv">1</span>,nx</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    snmm(i,j)<span class="kw">=</span>roughness4(i,j)</span>
@@ -310,14 +310,14 @@ C_f = \frac{gn^2}{h^{1/3}}
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end if</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end do</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end do</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>また、底面摩擦係数と底面せん断応力は以下のように計算されます。</p>
+<p>また、底面摩擦係数と底面せん断応力は以下のように計算される。</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">cf(i,j) = g * snmm(i,j)**2 / hs(i,j)**(1.d0/3.d0)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>usta(i,j) <span class="kw">=</span> cf(i,j)<span class="kw">**</span><span class="fl">0.5d0</span><span class="kw">*</span>vti(i,j)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>tausta(i,j) <span class="kw">=</span> usta(i,j)<span class="kw">**</span><span class="fl">2.d0</span><span class="kw">/</span>(spec<span class="kw">*</span>g<span class="kw">*</span>diam)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="粗度設定の考慮事項" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="粗度設定の考慮事項"><span class="header-section-number">4.2</span> 粗度設定の考慮事項</h2>
-<p>実際の河川地形における適切な粗度係数の設定は重要な課題です。粗度係数は以下の要因により変化します。</p>
+<p>実際の河川地形における適切な粗度係数の設定は重要な課題である。粗度係数は以下の要因により変化する。</p>
 <ol type="1">
 <li><strong>河床材料</strong>: 砂礫の大きさや分布</li>
 <li><strong>河床形状</strong>: 砂堆や砂州の存在</li>
@@ -326,7 +326,7 @@ C_f = \frac{gn^2}{h^{1/3}}
 </ol>
 <section id="粗度係数の推定" class="level3" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="粗度係数の推定"><span class="header-section-number">4.2.1</span> 粗度係数の推定</h3>
-<p>実際の河川において粗度係数を推定する方法としては、以下のアプローチがあります。</p>
+<p>実際の河川において粗度係数を推定する方法としては、以下のアプローチがある。</p>
 <ol type="1">
 <li><strong>既往文献の参照値</strong>: 河川の種類や特性に応じた一般的な値</li>
 <li><strong>実測データからの逆算</strong>: 水位・流量観測データからの逆算</li>
@@ -365,7 +365,7 @@ C_f = \frac{gn^2}{h^{1/3}}
 </section>
 <section id="空間分布の表現" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="空間分布の表現"><span class="header-section-number">4.3</span> 空間分布の表現</h2>
-<p>Nays2DHでは、計算領域内の各格子点において異なる粗度係数を設定することが可能です。これにより、河川の縦断方向・横断方向の粗度変化を考慮した詳細な計算が可能になります。</p>
+<p>Nays2DHでは、計算領域内の各格子点において異なる粗度係数を設定することが可能である。これにより、河川の縦断方向・横断方向の粗度変化を考慮した詳細な計算が可能となる。</p>
 
 
 </section>

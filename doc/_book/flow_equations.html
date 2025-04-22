@@ -254,13 +254,13 @@ window.Quarto = {
 
 <section id="流れの基礎式" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> 流れの基礎式</h1>
-<p>Nays2DHでは、水深積分された二次元浅水流方程式を用いて流れの計算を行います。基礎方程式は以下の通りです。</p>
+<p>Nays2DHでは、水深積分された二次元浅水流方程式を用いて流れの計算を行う。基礎方程式は以下の通りである。</p>
 <section id="連続式" class="level3" data-number="3.0.1">
 <h3 data-number="3.0.1" class="anchored" data-anchor-id="連続式"><span class="header-section-number">3.0.1</span> 連続式</h3>
 <p><span class="math display">\[
 \frac{\partial h}{\partial t} + \frac{\partial (hu)}{\partial x} + \frac{\partial (hv)}{\partial y} = 0
 \]</span></p>
-<p>ここで、<span class="math inline">\(h\)</span>は水深、<span class="math inline">\(u\)</span>と<span class="math inline">\(v\)</span>は<span class="math inline">\(x\)</span>方向と<span class="math inline">\(y\)</span>方向の水深平均流速、<span class="math inline">\(t\)</span>は時間です。</p>
+<p>ここで、<span class="math inline">\(h\)</span>は水深、<span class="math inline">\(u\)</span>と<span class="math inline">\(v\)</span>は<span class="math inline">\(x\)</span>方向と<span class="math inline">\(y\)</span>方向の水深平均流速、<span class="math inline">\(t\)</span>は時間である。</p>
 </section>
 <section id="運動量式" class="level3" data-number="3.0.2">
 <h3 data-number="3.0.2" class="anchored" data-anchor-id="運動量式"><span class="header-section-number">3.0.2</span> 運動量式</h3>
@@ -270,11 +270,11 @@ window.Quarto = {
 \frac{\partial v}{\partial t} + u\frac{\partial v}{\partial x} + v\frac{\partial v}{\partial y} &amp;= -g\frac{\partial H}{\partial y} + \nu_t \left( \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} \right) - \frac{\tau_y}{\rho h} + F_y
 \end{align}
 \]</span></p>
-<p>ここで、<span class="math inline">\(g\)</span>は重力加速度、<span class="math inline">\(H\)</span>は水位、<span class="math inline">\(\nu_t\)</span>は渦動粘性係数、<span class="math inline">\(\tau_x\)</span>と<span class="math inline">\(\tau_y\)</span>は底面せん断応力の<span class="math inline">\(x\)</span>方向と<span class="math inline">\(y\)</span>方向成分、<span class="math inline">\(\rho\)</span>は水の密度、<span class="math inline">\(F_x\)</span>と<span class="math inline">\(F_y\)</span>は外力項（構造物や植生による抵抗など）です。</p>
+<p>ここで、<span class="math inline">\(g\)</span>は重力加速度、<span class="math inline">\(H\)</span>は水位、<span class="math inline">\(\nu_t\)</span>は渦動粘性係数、<span class="math inline">\(\tau_x\)</span>と<span class="math inline">\(\tau_y\)</span>は底面せん断応力の<span class="math inline">\(x\)</span>方向と<span class="math inline">\(y\)</span>方向成分、<span class="math inline">\(\rho\)</span>は水の密度、<span class="math inline">\(F_x\)</span>と<span class="math inline">\(F_y\)</span>は外力項（構造物や植生による抵抗など）である。</p>
 </section>
 <section id="座標変換" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="座標変換"><span class="header-section-number">3.1</span> 座標変換</h2>
-<p>Nays2DHでは、一般曲線座標系（<span class="math inline">\(\xi\)</span>-<span class="math inline">\(\eta\)</span>座標系）を用いて地形の複雑さに対応しています。基礎方程式は以下のように変換されます。</p>
+<p>Nays2DHでは、一般曲線座標系（<span class="math inline">\(\xi\)</span>-<span class="math inline">\(\eta\)</span>座標系）を用いて地形の複雑さに対応している。基礎方程式は以下のように変換される。</p>
 <section id="連続式一般曲線座標系" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="連続式一般曲線座標系"><span class="header-section-number">3.1.1</span> 連続式（一般曲線座標系）</h3>
 <p><span class="math display">\[
@@ -289,33 +289,33 @@ window.Quarto = {
 \frac{\partial v}{\partial t} + \frac{U}{J}\frac{\partial v}{\partial \xi} + \frac{V}{J}\frac{\partial v}{\partial \eta} &amp;= -g\left(\alpha_{21}\frac{\partial H}{\partial \xi} + \alpha_{22}\frac{\partial H}{\partial \eta}\right) + \text{(粘性項)} - \frac{\tau_y}{\rho h} + F_y
 \end{align}
 \]</span></p>
-<p>ここで、<span class="math inline">\(J\)</span>はヤコビアン、<span class="math inline">\(U\)</span>と<span class="math inline">\(V\)</span>は反変速度成分、<span class="math inline">\(\alpha_{ij}\)</span>は計量テンソルの成分です。</p>
+<p>ここで、<span class="math inline">\(J\)</span>はヤコビアン、<span class="math inline">\(U\)</span>と<span class="math inline">\(V\)</span>は反変速度成分、<span class="math inline">\(\alpha_{ij}\)</span>は計量テンソルの成分である。</p>
 </section>
 </section>
 <section id="底面せん断応力" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="底面せん断応力"><span class="header-section-number">3.2</span> 底面せん断応力</h2>
-<p>底面せん断応力は以下のように計算されます。</p>
+<p>底面せん断応力は以下のように計算される。</p>
 <p><span class="math display">\[
 \begin{align}
 \tau_x &amp;= \rho C_f u \sqrt{u^2 + v^2} \\
 \tau_y &amp;= \rho C_f v \sqrt{u^2 + v^2}
 \end{align}
 \]</span></p>
-<p>ここで、<span class="math inline">\(C_f\)</span>は底面摩擦係数であり、Manning則を用いて以下のように表されます。</p>
+<p>ここで、<span class="math inline">\(C_f\)</span>は底面摩擦係数であり、Manning則を用いて以下のように表される。</p>
 <p><span class="math display">\[
 C_f = \frac{gn^2}{h^{1/3}}
 \]</span></p>
-<p><span class="math inline">\(n\)</span>はManningの粗度係数です。</p>
+<p><span class="math inline">\(n\)</span>はManningの粗度係数である。</p>
 </section>
 <section id="数値解法" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="数値解法"><span class="header-section-number">3.3</span> 数値解法</h2>
-<p>Nays2DHでは、浅水流方程式を解くために以下の数値解法を用いています。</p>
+<p>Nays2DHでは、浅水流方程式を解くために以下の数値解法を用いている。</p>
 <ol type="1">
 <li>空間離散化：有限差分法</li>
 <li>時間積分：陽的スキーム（リープフロッグ法）</li>
 <li>移流項：風上差分法</li>
 </ol>
-<p>これらの手法により、安定かつ高精度な流れの計算が実現されています。</p>
+<p>これらの手法により、安定かつ高精度な流れの計算が実現されている。</p>
 
 
 </section>
