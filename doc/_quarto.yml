@@ -3,18 +3,18 @@
   output-dir: _book
 
 book:
-  title: "Nays2DHモデル技術解説書"
-  author: "Nays2DH開発チーム"
-  date: "2024/7/10"
+  title: "Nays2DHモデル技術解説書(暫定版)"
+  author: "Kazutake Asahi"
+  date: "2025/4/22"
   chapters:
     - index.qmd
-    - part: "1. 基礎式"
+    - part: "基礎式"
       chapters:
         - flow_equations.qmd
         - flow_roughness.qmd
         - sediment_equations.qmd
         - sediment_mixed.qmd
-    - part: "3. プログラム説明"
+    - part: "プログラム説明"
       chapters:
         - program_variables.qmd
         - program_subroutines.qmd
