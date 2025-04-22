@@ -31,13 +31,14 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
 
-      - name: Check artifact existence
+      - name: Check for _book directory
         run: |
           if [ ! -d "./doc/_book" ]; then
-            echo "Error: ./doc/_book directory not found. Please build the book locally first."
+            echo "警告: ./doc/_book ディレクトリが見つかりません。"
+            echo "ローカルで 'cd doc && quarto render' を実行してから再度プッシュしてください。"
             exit 1
           fi
-          echo "Found ./doc/_book directory, proceeding with deployment."
+          echo "doc/_book ディレクトリが見つかりました。デプロイを続行します。"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
