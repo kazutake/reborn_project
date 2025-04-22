@@ -4,7 +4,7 @@
 
 book:
   title: "Nays2DHモデル技術解説書(暫定版)"
-  author: "Kazutake Asahi"
+  author: "RiverLink, Co., Ltd."
   date: "2025/4/22"
   chapters:
     - index.qmd
