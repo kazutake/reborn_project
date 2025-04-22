@@ -1,3 +1,4 @@
 # reborn_project
 
-テスト中
+shoul read below
+https://kazutake.github.io/reborn_project/
