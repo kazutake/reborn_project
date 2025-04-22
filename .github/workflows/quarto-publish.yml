@@ -16,6 +16,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 完全なGit履歴を取得
+
+      - name: Debug Environment Info
+        run: |
+          echo "リポジトリ: $GITHUB_REPOSITORY"
+          echo "ブランチ: $GITHUB_REF"
+          echo "ワークスペース: $GITHUB_WORKSPACE"
+          echo "現在のディレクトリ:"
+          pwd
+          echo "ディレクトリ内容:"
+          ls -la
+          echo "doc/_book内容:"
+          ls -la ./doc/_book || echo "doc/_bookディレクトリが見つかりません"
 
       - name: Check for _book directory
         run: |
@@ -25,11 +39,24 @@ jobs:
             exit 1
           fi
           echo "doc/_book ディレクトリが見つかりました。デプロイを続行します。"
-          ls -la ./doc/_book
+          echo "ファイル一覧:"
+          find ./doc/_book -type f | head -20
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ./doc/_book  # デプロイするフォルダ
           branch: gh-pages     # デプロイ先のブランチ
-          clean: true          # デプロイ先ブランチの古いファイルを削除 
+          clean: true          # デプロイ先ブランチの古いファイルを削除
+          token: ${{ secrets.GITHUB_TOKEN }}  # 明示的にトークンを指定
+          git-config-name: GitHub Actions     # コミット時のユーザー名
+          git-config-email: actions@github.com  # コミット時のメールアドレス
+          commit-message: "Update documentation [skip ci]"
+
+      - name: Output deployment results
+        run: |
+          echo "デプロイが完了しました"
+          echo "GitHub Pagesを設定するには、リポジトリ設定（Settings > Pages）で:"
+          echo "- Source: Deploy from a branch"
+          echo "- Branch: gh-pages / (root)"
+          echo "を選択してください" 
