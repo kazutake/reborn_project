@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; 連続式（Exner方程式） – Nays2DHモデル技術解説書(暫定版)</title>
+<title>3&nbsp; 河床変動の基礎式 – Nays2DHモデル技術解説書(暫定版)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sediment_equations.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">連続式（Exner方程式）</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sediment_equations.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">河床変動の基礎式</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="サーチ" onclick="window.quartoOpenSearch();">
@@ -138,49 +138,49 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">モデルの概要</span></span></a>
+ <span class="menu-text">まえがき</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./flow_equations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">浅水流方程式</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">流れの基礎式</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./flow_roughness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manningの粗度係数</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">底面粗度</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sediment_equations.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">連続式（Exner方程式）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">河床変動の基礎式</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sediment_mixed.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">混合粒径モデルの概要</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">混合粒径モデル</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./program_variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">基本変数</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">変数一覧</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./program_subroutines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">主要モジュール</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">サブルーチン一覧</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">references.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">references.html</span></span></a>
   </div>
 </li>
     </ul>
@@ -193,17 +193,15 @@ window.Quarto = {
     <h2 id="toc-title">目次</h2>
    
   <ul>
-  <li><a href="#河床変動の基礎式" id="toc-河床変動の基礎式" class="nav-link active" data-scroll-target="#河床変動の基礎式"><span class="header-section-number">5</span> 河床変動の基礎式</a>
+  <li><a href="#連続式exner方程式" id="toc-連続式exner方程式" class="nav-link active" data-scroll-target="#連続式exner方程式"><span class="header-section-number">3.1</span> 連続式（Exner方程式）</a></li>
+  <li><a href="#河床せん断応力と無次元パラメータ" id="toc-河床せん断応力と無次元パラメータ" class="nav-link" data-scroll-target="#河床せん断応力と無次元パラメータ"><span class="header-section-number">3.2</span> 河床せん断応力と無次元パラメータ</a></li>
+  <li><a href="#掃流砂量式" id="toc-掃流砂量式" class="nav-link" data-scroll-target="#掃流砂量式"><span class="header-section-number">3.3</span> 掃流砂量式</a>
   <ul class="collapse">
-  <li><a href="#河床せん断応力と無次元パラメータ" id="toc-河床せん断応力と無次元パラメータ" class="nav-link" data-scroll-target="#河床せん断応力と無次元パラメータ"><span class="header-section-number">5.1</span> 河床せん断応力と無次元パラメータ</a></li>
-  <li><a href="#掃流砂量式" id="toc-掃流砂量式" class="nav-link" data-scroll-target="#掃流砂量式"><span class="header-section-number">5.2</span> 掃流砂量式</a>
-  <ul class="collapse">
-  <li><a href="#mpm公式meyer-peter-and-mller" id="toc-mpm公式meyer-peter-and-mller" class="nav-link" data-scroll-target="#mpm公式meyer-peter-and-mller"><span class="header-section-number">5.2.1</span> MPM公式（Meyer-Peter and M?ller）</a></li>
-  <li><a href="#芦田道上公式" id="toc-芦田道上公式" class="nav-link" data-scroll-target="#芦田道上公式"><span class="header-section-number">5.2.2</span> 芦田・道上公式</a></li>
+  <li><a href="#mpm公式meyer-peter-and-mller" id="toc-mpm公式meyer-peter-and-mller" class="nav-link" data-scroll-target="#mpm公式meyer-peter-and-mller"><span class="header-section-number">3.3.1</span> MPM公式（Meyer-Peter and M?ller）</a></li>
+  <li><a href="#芦田道上公式" id="toc-芦田道上公式" class="nav-link" data-scroll-target="#芦田道上公式"><span class="header-section-number">3.3.2</span> 芦田・道上公式</a></li>
   </ul></li>
-  <li><a href="#浮遊砂の支配方程式" id="toc-浮遊砂の支配方程式" class="nav-link" data-scroll-target="#浮遊砂の支配方程式"><span class="header-section-number">5.3</span> 浮遊砂の支配方程式</a></li>
-  <li><a href="#数値解法" id="toc-数値解法" class="nav-link" data-scroll-target="#数値解法"><span class="header-section-number">5.4</span> 数値解法</a></li>
-  </ul></li>
+  <li><a href="#浮遊砂の支配方程式" id="toc-浮遊砂の支配方程式" class="nav-link" data-scroll-target="#浮遊砂の支配方程式"><span class="header-section-number">3.4</span> 浮遊砂の支配方程式</a></li>
+  <li><a href="#数値解法" id="toc-数値解法" class="nav-link" data-scroll-target="#数値解法"><span class="header-section-number">3.5</span> 数値解法</a></li>
   </ul>
 </nav>
     </div>
@@ -212,7 +210,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">連続式（Exner方程式）</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">河床変動の基礎式</span></h1>
 </div>
 
 
@@ -229,9 +227,9 @@ window.Quarto = {
 </header>
 
 
-<section id="河床変動の基礎式" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> 河床変動の基礎式</h1>
 <p>Nays2DHでは、流れの計算と連携して河床変動計算を行う。本章では河床変動計算の基礎式について解説する。</p>
+<section id="連続式exner方程式" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="連続式exner方程式"><span class="header-section-number">3.1</span> 連続式（Exner方程式）</h2>
 <p>河床変動の基本方程式は、次の連続式（Exner方程式）で表される。</p>
 <p><span class="math display">\[
 \frac{\partial z_b}{\partial t} + \frac{1}{1-\lambda} \left( \frac{\partial q_{bx}}{\partial x} + \frac{\partial q_{by}}{\partial y} \right) = 0
@@ -242,8 +240,9 @@ window.Quarto = {
 \frac{\partial z_b}{\partial t} + \frac{1}{1-\lambda} \left[ \left( \frac{\partial q_{bx}}{\partial x} + \frac{\partial q_{by}}{\partial y} \right) + (E - D) \right] = 0
 \]</span></p>
 <p>ここで、<span class="math inline">\(E\)</span>は浮上量（pickup rate）、<span class="math inline">\(D\)</span>は沈降量（deposition rate）である。</p>
-<section id="河床せん断応力と無次元パラメータ" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="河床せん断応力と無次元パラメータ"><span class="header-section-number">5.1</span> 河床せん断応力と無次元パラメータ</h2>
+</section>
+<section id="河床せん断応力と無次元パラメータ" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="河床せん断応力と無次元パラメータ"><span class="header-section-number">3.2</span> 河床せん断応力と無次元パラメータ</h2>
 <p>掃流砂量を計算するためには、河床せん断応力を評価する必要がある。河床せん断応力は以下の式で与えられる。</p>
 <p><span class="math display">\[
 \tau_0 = \rho C_f (u^2 + v^2)
@@ -254,25 +253,25 @@ window.Quarto = {
 \]</span></p>
 <p>ここで、<span class="math inline">\(\rho_s\)</span>は砂礫の密度、<span class="math inline">\(d\)</span>は砂礫の粒径、<span class="math inline">\(\sigma\)</span>は砂礫の密度、<span class="math inline">\(\rho\)</span>は水の密度である。</p>
 </section>
-<section id="掃流砂量式" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="掃流砂量式"><span class="header-section-number">5.2</span> 掃流砂量式</h2>
+<section id="掃流砂量式" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="掃流砂量式"><span class="header-section-number">3.3</span> 掃流砂量式</h2>
 <p>Nays2DHでは、複数の掃流砂量式が実装されている。代表的なものとして以下の式がある。</p>
-<section id="mpm公式meyer-peter-and-mller" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="mpm公式meyer-peter-and-mller"><span class="header-section-number">5.2.1</span> MPM公式（Meyer-Peter and M?ller）</h3>
+<section id="mpm公式meyer-peter-and-mller" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="mpm公式meyer-peter-and-mller"><span class="header-section-number">3.3.1</span> MPM公式（Meyer-Peter and M?ller）</h3>
 <p><span class="math display">\[
 q_b^* = 8(\tau_* - \tau_{*c})^{3/2}
 \]</span></p>
 </section>
-<section id="芦田道上公式" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="芦田道上公式"><span class="header-section-number">5.2.2</span> 芦田・道上公式</h3>
+<section id="芦田道上公式" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="芦田道上公式"><span class="header-section-number">3.3.2</span> 芦田・道上公式</h3>
 <p><span class="math display">\[
 q_b^* = 17\tau_*^{3/2}(1 - \frac{\tau_{*c}}{\tau_*})(1 - \frac{u_{*c}}{u_*})
 \]</span></p>
 <p>ここで、<span class="math inline">\(q_b^*\)</span>は無次元掃流砂量、<span class="math inline">\(\tau_{*c}\)</span>は無次元限界掃流力、<span class="math inline">\(u_{*c}\)</span>は限界摩擦速度、<span class="math inline">\(u_*\)</span>は摩擦速度である。</p>
 </section>
 </section>
-<section id="浮遊砂の支配方程式" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="浮遊砂の支配方程式"><span class="header-section-number">5.3</span> 浮遊砂の支配方程式</h2>
+<section id="浮遊砂の支配方程式" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="浮遊砂の支配方程式"><span class="header-section-number">3.4</span> 浮遊砂の支配方程式</h2>
 <p>浮遊砂は、以下の移流拡散方程式で計算される。</p>
 <p><span class="math display">\[
 \frac{\partial (hC)}{\partial t} + \frac{\partial (huC)}{\partial x} + \frac{\partial (hvC)}{\partial y} = \frac{\partial}{\partial x}\left(h\varepsilon_x\frac{\partial C}{\partial x}\right) + \frac{\partial}{\partial y}\left(h\varepsilon_y\frac{\partial C}{\partial y}\right) + E - D
@@ -287,8 +286,8 @@ D &amp;= w_0 C
 \]</span></p>
 <p>ここで、<span class="math inline">\(w_0\)</span>は砂礫の沈降速度、<span class="math inline">\(C_a\)</span>は基準面濃度である。</p>
 </section>
-<section id="数値解法" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="数値解法"><span class="header-section-number">5.4</span> 数値解法</h2>
+<section id="数値解法" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="数値解法"><span class="header-section-number">3.5</span> 数値解法</h2>
 <p>河床変動計算の数値解法は以下の通りである。</p>
 <ol type="1">
 <li>流れの計算から底面せん断応力を求める</li>
@@ -299,7 +298,6 @@ D &amp;= w_0 C
 <p>この一連の計算を繰り返すことで、流れと河床変動の相互作用を考慮した計算が可能となる。</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -722,13 +720,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./flow_roughness.html" class="pagination-link" aria-label="Manningの粗度係数">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manningの粗度係数</span></span>
+      <a href="./flow_roughness.html" class="pagination-link" aria-label="底面粗度">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">底面粗度</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sediment_mixed.html" class="pagination-link" aria-label="混合粒径モデルの概要">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">混合粒径モデルの概要</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sediment_mixed.html" class="pagination-link" aria-label="混合粒径モデル">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">混合粒径モデル</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

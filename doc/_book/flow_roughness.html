@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Manningの粗度係数 – Nays2DHモデル技術解説書(暫定版)</title>
+<title>2&nbsp; 底面粗度 – Nays2DHモデル技術解説書(暫定版)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -144,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./flow_roughness.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manningの粗度係数</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./flow_roughness.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">底面粗度</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="サーチ" onclick="window.quartoOpenSearch();">
@@ -172,49 +172,49 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">モデルの概要</span></span></a>
+ <span class="menu-text">まえがき</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./flow_equations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">浅水流方程式</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">流れの基礎式</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./flow_roughness.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manningの粗度係数</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">底面粗度</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sediment_equations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">連続式（Exner方程式）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">河床変動の基礎式</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sediment_mixed.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">混合粒径モデルの概要</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">混合粒径モデル</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./program_variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">基本変数</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">変数一覧</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./program_subroutines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">主要モジュール</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">サブルーチン一覧</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">references.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">references.html</span></span></a>
   </div>
 </li>
     </ul>
@@ -227,16 +227,16 @@ window.Quarto = {
     <h2 id="toc-title">目次</h2>
    
   <ul>
-  <li><a href="#底面粗度" id="toc-底面粗度" class="nav-link active" data-scroll-target="#底面粗度"><span class="header-section-number">4</span> 底面粗度</a>
+  <li><a href="#manningの粗度係数" id="toc-manningの粗度係数" class="nav-link active" data-scroll-target="#manningの粗度係数"><span class="header-section-number">2.1</span> Manningの粗度係数</a></li>
+  <li><a href="#コードにおける実装" id="toc-コードにおける実装" class="nav-link" data-scroll-target="#コードにおける実装"><span class="header-section-number">2.2</span> コードにおける実装</a></li>
+  <li><a href="#植生の影響を考慮した底面せん断力の計算" id="toc-植生の影響を考慮した底面せん断力の計算" class="nav-link" data-scroll-target="#植生の影響を考慮した底面せん断力の計算"><span class="header-section-number">2.3</span> 植生の影響を考慮した底面せん断力の計算</a></li>
+  <li><a href="#粗度設定の考慮事項" id="toc-粗度設定の考慮事項" class="nav-link" data-scroll-target="#粗度設定の考慮事項"><span class="header-section-number">2.4</span> 粗度設定の考慮事項</a>
   <ul class="collapse">
-  <li><a href="#コードにおける実装" id="toc-コードにおける実装" class="nav-link" data-scroll-target="#コードにおける実装"><span class="header-section-number">4.1</span> コードにおける実装</a></li>
-  <li><a href="#粗度設定の考慮事項" id="toc-粗度設定の考慮事項" class="nav-link" data-scroll-target="#粗度設定の考慮事項"><span class="header-section-number">4.2</span> 粗度設定の考慮事項</a>
-  <ul class="collapse">
-  <li><a href="#粗度係数の推定" id="toc-粗度係数の推定" class="nav-link" data-scroll-target="#粗度係数の推定"><span class="header-section-number">4.2.1</span> 粗度係数の推定</a></li>
-  <li><a href="#代表的な粗度係数の値" id="toc-代表的な粗度係数の値" class="nav-link" data-scroll-target="#代表的な粗度係数の値"><span class="header-section-number">4.2.2</span> 代表的な粗度係数の値</a></li>
+  <li><a href="#粗度係数の推定" id="toc-粗度係数の推定" class="nav-link" data-scroll-target="#粗度係数の推定"><span class="header-section-number">2.4.1</span> 粗度係数の推定</a></li>
+  <li><a href="#代表的な粗度係数の値" id="toc-代表的な粗度係数の値" class="nav-link" data-scroll-target="#代表的な粗度係数の値"><span class="header-section-number">2.4.2</span> 代表的な粗度係数の値</a></li>
   </ul></li>
-  <li><a href="#空間分布の表現" id="toc-空間分布の表現" class="nav-link" data-scroll-target="#空間分布の表現"><span class="header-section-number">4.3</span> 空間分布の表現</a></li>
-  </ul></li>
+  <li><a href="#底面せん断応力の物理的意味と重要性" id="toc-底面せん断応力の物理的意味と重要性" class="nav-link" data-scroll-target="#底面せん断応力の物理的意味と重要性"><span class="header-section-number">2.5</span> 底面せん断応力の物理的意味と重要性</a></li>
+  <li><a href="#空間分布の表現" id="toc-空間分布の表現" class="nav-link" data-scroll-target="#空間分布の表現"><span class="header-section-number">2.6</span> 空間分布の表現</a></li>
   </ul>
 </nav>
     </div>
@@ -245,7 +245,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manningの粗度係数</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">底面粗度</span></h1>
 </div>
 
 
@@ -262,9 +262,9 @@ window.Quarto = {
 </header>
 
 
-<section id="底面粗度" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> 底面粗度</h1>
 <p>底面粗度は、河床と水流の間の摩擦を表現するもので、Nays2DHのモデルにおいて流れの計算に重要な役割を果たす。</p>
+<section id="manningの粗度係数" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="manningの粗度係数"><span class="header-section-number">2.1</span> Manningの粗度係数</h2>
 <p>Nays2DHでは、底面粗度の表現にManningの粗度係数<span class="math inline">\(n\)</span>を使用している。底面せん断応力<span class="math inline">\(\tau_0\)</span>は次式で表される。</p>
 <p><span class="math display">\[
 \tau_0 = \rho C_f (u^2 + v^2)
@@ -274,8 +274,9 @@ window.Quarto = {
 C_f = \frac{gn^2}{h^{1/3}}
 \]</span></p>
 <p>ここで、<span class="math inline">\(g\)</span>は重力加速度、<span class="math inline">\(h\)</span>は水深である。</p>
-<section id="コードにおける実装" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="コードにおける実装"><span class="header-section-number">4.1</span> コードにおける実装</h2>
+</section>
+<section id="コードにおける実装" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="コードにおける実装"><span class="header-section-number">2.2</span> コードにおける実装</h2>
 <p>Nays2DHのコードでは、以下のように粗度係数が設定され、底面摩擦が計算されている。</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">do</span> j<span class="kw">=</span><span class="dv">1</span>,ny</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">do</span> i<span class="kw">=</span><span class="dv">1</span>,nx</span>
@@ -292,9 +293,25 @@ C_f = \frac{gn^2}{h^{1/3}}
 <div class="sourceCode" id="cb2"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">cf(i,j) = g * snmm(i,j)**2 / hs(i,j)**(1.d0/3.d0)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>usta(i,j) <span class="kw">=</span> cf(i,j)<span class="kw">**</span><span class="fl">0.5d0</span><span class="kw">*</span>vti(i,j)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>tausta(i,j) <span class="kw">=</span> usta(i,j)<span class="kw">**</span><span class="fl">2.d0</span><span class="kw">/</span>(spec<span class="kw">*</span>g<span class="kw">*</span>diam)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>ここで： - <code>cf(i,j)</code> は底面摩擦係数<span class="math inline">\(C_f\)</span> - <code>usta(i,j)</code> は摩擦速度<span class="math inline">\(u_*\)</span>（水流が河床に及ぼすせん断力を速度の次元で表したもの） - <code>tausta(i,j)</code> は無次元化された底面せん断応力（シールズ数とも呼ばれる） - <code>vti(i,j)</code> は流速ベクトルの大きさ<span class="math inline">\(\sqrt{u^2 + v^2}\)</span> - <code>spec</code> は砂粒の水中比重 - <code>diam</code> は河床材料の代表粒径</p>
+<p>この計算は、Nays2DHの<code>taustacal_uni</code>と<code>taustacal_mix</code>サブルーチン内で実装されており、流速が微小（1e-8未満）または水深が最小値（hmin）未満の場合は、せん断応力と摩擦速度をゼロに設定する条件分岐も含まれている。</p>
 </section>
-<section id="粗度設定の考慮事項" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="粗度設定の考慮事項"><span class="header-section-number">4.2</span> 粗度設定の考慮事項</h2>
+<section id="植生の影響を考慮した底面せん断力の計算" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="植生の影響を考慮した底面せん断力の計算"><span class="header-section-number">2.3</span> 植生の影響を考慮した底面せん断力の計算</h2>
+<p>Nays2DHでは植生の影響も考慮した底面せん断力の計算が可能である。この場合、以下のようなコードにより粗度に植生の効果が加味される。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">c_xi_shear = g * sn_up(i,j)**2 / hs_up**1.33333d0</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">c_veg = ( cd_veg(i,j) + cd_veg(i+1,j) ) * 0.5d0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>h_veg <span class="kw">=</span> ( vege_h(i,j)<span class="kw">+</span>vege_h(i<span class="kw">+</span><span class="dv">1</span>,j) )<span class="kw">*</span><span class="fl">0.5d0</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>h_veg <span class="kw">=</span> <span class="bu">min</span>( h_veg, hs_up )</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                            </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">c_xi_shear = c_xi_shear + c_veg*h_veg/hs_up</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>f_xi <span class="kw">=</span> <span class="kw">-</span> c_xi_shear <span class="kw">*</span> vv_up</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>ここで： - <code>c_veg</code> は植生の抵抗係数 - <code>h_veg</code> は植生の高さ - <code>f_xi</code> は底面摩擦を含む抵抗力の係数</p>
+<p>この実装により、河床の粗度に加えて植生による抵抗が流れに与える影響を適切に表現することができる。</p>
+</section>
+<section id="粗度設定の考慮事項" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="粗度設定の考慮事項"><span class="header-section-number">2.4</span> 粗度設定の考慮事項</h2>
 <p>実際の河川地形における適切な粗度係数の設定は重要な課題である。粗度係数は以下の要因により変化する。</p>
 <ol type="1">
 <li><strong>河床材料</strong>: 砂礫の大きさや分布</li>
@@ -302,8 +319,8 @@ C_f = \frac{gn^2}{h^{1/3}}
 <li><strong>植生状態</strong>: 水草や河畔林の影響</li>
 <li><strong>河川の蛇行度</strong>: 断面形状の複雑さ</li>
 </ol>
-<section id="粗度係数の推定" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="粗度係数の推定"><span class="header-section-number">4.2.1</span> 粗度係数の推定</h3>
+<section id="粗度係数の推定" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="粗度係数の推定"><span class="header-section-number">2.4.1</span> 粗度係数の推定</h3>
 <p>実際の河川において粗度係数を推定する方法としては、以下のアプローチがある。</p>
 <ol type="1">
 <li><strong>既往文献の参照値</strong>: 河川の種類や特性に応じた一般的な値</li>
@@ -311,8 +328,8 @@ C_f = \frac{gn^2}{h^{1/3}}
 <li><strong>経験式による推定</strong>: 河床材料の粒径などから推定</li>
 </ol>
 </section>
-<section id="代表的な粗度係数の値" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="代表的な粗度係数の値"><span class="header-section-number">4.2.2</span> 代表的な粗度係数の値</h3>
+<section id="代表的な粗度係数の値" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="代表的な粗度係数の値"><span class="header-section-number">2.4.2</span> 代表的な粗度係数の値</h3>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -341,12 +358,21 @@ C_f = \frac{gn^2}{h^{1/3}}
 </table>
 </section>
 </section>
-<section id="空間分布の表現" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="空間分布の表現"><span class="header-section-number">4.3</span> 空間分布の表現</h2>
-<p>Nays2DHでは、計算領域内の各格子点において異なる粗度係数を設定することが可能である。これにより、河川の縦断方向・横断方向の粗度変化を考慮した詳細な計算が可能となる。</p>
-
-
+<section id="底面せん断応力の物理的意味と重要性" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="底面せん断応力の物理的意味と重要性"><span class="header-section-number">2.5</span> 底面せん断応力の物理的意味と重要性</h2>
+<p>底面せん断応力<span class="math inline">\(\tau_0\)</span>は、流れが河床に及ぼす力を表し、単位面積あたりの力（N/m²）の次元を持つ。この値は以下のような河川プロセスに重要な影響を与える：</p>
+<ol type="1">
+<li><strong>河床変動</strong>: 底面せん断応力が河床材料の移動限界を超えると、河床材料が移動を始め、侵食や堆積を引き起こす</li>
+<li><strong>流砂量</strong>: 無次元せん断応力（tausta）は、流砂量式の主要なパラメータとして用いられる</li>
+<li><strong>河川形態</strong>: 長期的な底面せん断応力の分布は、河道形状の変化や河床形態（砂堆、砂州）の形成に影響する</li>
+</ol>
+<p>Nays2DHでは、底面せん断応力を適切に計算することで、これらの現象を精度よくシミュレーションすることが可能となっている。</p>
 </section>
+<section id="空間分布の表現" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="空間分布の表現"><span class="header-section-number">2.6</span> 空間分布の表現</h2>
+<p>Nays2DHでは、計算領域内の各格子点において異なる粗度係数を設定することが可能である。これにより、河川の縦断方向・横断方向の粗度変化を考慮した詳細な計算が可能となる。河床材料の変化や植生の分布を反映した粗度分布を与えることで、より現実的な流れ場のシミュレーションが実現できる。</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -769,13 +795,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./flow_equations.html" class="pagination-link" aria-label="浅水流方程式">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">浅水流方程式</span></span>
+      <a href="./flow_equations.html" class="pagination-link" aria-label="流れの基礎式">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">流れの基礎式</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sediment_equations.html" class="pagination-link" aria-label="連続式（Exner方程式）">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">連続式（Exner方程式）</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sediment_equations.html" class="pagination-link" aria-label="河床変動の基礎式">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">河床変動の基礎式</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
