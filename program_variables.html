@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; 基本変数 – Nays2DHモデル技術解説書(暫定版)</title>
+<title>5&nbsp; 変数一覧 – Nays2DHモデル技術解説書(暫定版)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -144,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./program_variables.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">基本変数</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./program_variables.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">変数一覧</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="サーチ" onclick="window.quartoOpenSearch();">
@@ -172,49 +172,49 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">モデルの概要</span></span></a>
+ <span class="menu-text">まえがき</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./flow_equations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">浅水流方程式</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">流れの基礎式</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./flow_roughness.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manningの粗度係数</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">底面粗度</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sediment_equations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">連続式（Exner方程式）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">河床変動の基礎式</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sediment_mixed.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">混合粒径モデルの概要</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">混合粒径モデル</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./program_variables.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">基本変数</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">変数一覧</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./program_subroutines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">主要モジュール</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">サブルーチン一覧</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">references.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">references.html</span></span></a>
   </div>
 </li>
     </ul>
@@ -227,16 +227,14 @@ window.Quarto = {
     <h2 id="toc-title">目次</h2>
    
   <ul>
-  <li><a href="#変数一覧" id="toc-変数一覧" class="nav-link active" data-scroll-target="#変数一覧"><span class="header-section-number">7</span> 変数一覧</a>
-  <ul class="collapse">
-  <li><a href="#座標系関連" id="toc-座標系関連" class="nav-link" data-scroll-target="#座標系関連"><span class="header-section-number">7.1</span> 座標系関連</a></li>
-  <li><a href="#流れ関連" id="toc-流れ関連" class="nav-link" data-scroll-target="#流れ関連"><span class="header-section-number">7.2</span> 流れ関連</a></li>
-  <li><a href="#河床変動関連" id="toc-河床変動関連" class="nav-link" data-scroll-target="#河床変動関連"><span class="header-section-number">7.3</span> 河床変動関連</a></li>
-  <li><a href="#乱流モデル関連" id="toc-乱流モデル関連" class="nav-link" data-scroll-target="#乱流モデル関連"><span class="header-section-number">7.4</span> 乱流モデル関連</a></li>
-  <li><a href="#植生構造物関連" id="toc-植生構造物関連" class="nav-link" data-scroll-target="#植生構造物関連"><span class="header-section-number">7.5</span> 植生・構造物関連</a></li>
-  <li><a href="#境界条件関連" id="toc-境界条件関連" class="nav-link" data-scroll-target="#境界条件関連"><span class="header-section-number">7.6</span> 境界条件関連</a></li>
-  <li><a href="#その他の重要なパラメータ" id="toc-その他の重要なパラメータ" class="nav-link" data-scroll-target="#その他の重要なパラメータ"><span class="header-section-number">7.7</span> その他の重要なパラメータ</a></li>
-  </ul></li>
+  <li><a href="#基本変数" id="toc-基本変数" class="nav-link active" data-scroll-target="#基本変数"><span class="header-section-number">5.1</span> 基本変数</a></li>
+  <li><a href="#座標系関連" id="toc-座標系関連" class="nav-link" data-scroll-target="#座標系関連"><span class="header-section-number">5.2</span> 座標系関連</a></li>
+  <li><a href="#流れ関連" id="toc-流れ関連" class="nav-link" data-scroll-target="#流れ関連"><span class="header-section-number">5.3</span> 流れ関連</a></li>
+  <li><a href="#河床変動関連" id="toc-河床変動関連" class="nav-link" data-scroll-target="#河床変動関連"><span class="header-section-number">5.4</span> 河床変動関連</a></li>
+  <li><a href="#乱流モデル関連" id="toc-乱流モデル関連" class="nav-link" data-scroll-target="#乱流モデル関連"><span class="header-section-number">5.5</span> 乱流モデル関連</a></li>
+  <li><a href="#植生構造物関連" id="toc-植生構造物関連" class="nav-link" data-scroll-target="#植生構造物関連"><span class="header-section-number">5.6</span> 植生・構造物関連</a></li>
+  <li><a href="#境界条件関連" id="toc-境界条件関連" class="nav-link" data-scroll-target="#境界条件関連"><span class="header-section-number">5.7</span> 境界条件関連</a></li>
+  <li><a href="#その他の重要なパラメータ" id="toc-その他の重要なパラメータ" class="nav-link" data-scroll-target="#その他の重要なパラメータ"><span class="header-section-number">5.8</span> その他の重要なパラメータ</a></li>
   </ul>
 </nav>
     </div>
@@ -245,7 +243,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">基本変数</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">変数一覧</span></h1>
 </div>
 
 
@@ -262,9 +260,9 @@ window.Quarto = {
 </header>
 
 
-<section id="変数一覧" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> 変数一覧</h1>
 <p>Nays2DHプログラムで使用される主要な変数について説明します。これらの変数は各モジュールで定義され、プログラム全体で共有されています。</p>
+<section id="基本変数" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="基本変数"><span class="header-section-number">5.1</span> 基本変数</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -321,8 +319,9 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<section id="座標系関連" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="座標系関連"><span class="header-section-number">7.1</span> 座標系関連</h2>
+</section>
+<section id="座標系関連" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="座標系関連"><span class="header-section-number">5.2</span> 座標系関連</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> common_cmxy</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">implicit</span> <span class="kw">none</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real(8)</span>,<span class="dt">dimension(:,:)</span>,<span class="dt">allocatable</span> <span class="dt">::</span> x, y</span>
@@ -365,8 +364,8 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="流れ関連" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="流れ関連"><span class="header-section-number">7.2</span> 流れ関連</h2>
+<section id="流れ関連" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="流れ関連"><span class="header-section-number">5.3</span> 流れ関連</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> common_cmuv</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">implicit</span> <span class="kw">none</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real(8)</span>,<span class="dt">dimension(:,:)</span>,<span class="dt">allocatable</span> <span class="dt">::</span> yu, yv</span>
@@ -409,8 +408,8 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="河床変動関連" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="河床変動関連"><span class="header-section-number">7.3</span> 河床変動関連</h2>
+<section id="河床変動関連" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="河床変動関連"><span class="header-section-number">5.4</span> 河床変動関連</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> common_cmtst</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">implicit</span> <span class="kw">none</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real(8)</span>,<span class="dt">dimension(:,:)</span>,<span class="dt">allocatable</span> <span class="dt">::</span> tausta, usta, vti</span>
@@ -503,8 +502,8 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="乱流モデル関連" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="乱流モデル関連"><span class="header-section-number">7.4</span> 乱流モデル関連</h2>
+<section id="乱流モデル関連" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="乱流モデル関連"><span class="header-section-number">5.5</span> 乱流モデル関連</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> common_cmsnu</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">implicit</span> <span class="kw">none</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real(8)</span>,<span class="dt">dimension(:,:)</span>,<span class="dt">allocatable</span> <span class="dt">::</span> snu, snu_x, snu0, snu0_x, snuk, <span class="co">snuk_x</span></span>
@@ -545,8 +544,8 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="植生構造物関連" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="植生構造物関連"><span class="header-section-number">7.5</span> 植生・構造物関連</h2>
+<section id="植生構造物関連" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="植生構造物関連"><span class="header-section-number">5.6</span> 植生・構造物関連</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> common_cmcf</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">implicit</span> <span class="kw">none</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real(8)</span>,<span class="dt">dimension(:,:)</span>,<span class="dt">allocatable</span> <span class="dt">::</span> cf, re, cd_veg, vege_el, vege_h</span>
@@ -582,8 +581,8 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="境界条件関連" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="境界条件関連"><span class="header-section-number">7.6</span> 境界条件関連</h2>
+<section id="境界条件関連" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="境界条件関連"><span class="header-section-number">5.7</span> 境界条件関連</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode fortran code-with-copy"><code class="sourceCode fortranfixed"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">real(8)</span>,<span class="dt">dimension(:)</span>,<span class="dt">allocatable</span> <span class="dt">::</span> t_hyd, q_ups, h_ups, h_dse</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">real(8)</span>,<span class="dt">dimension(:)</span>,<span class="dt">allocatable</span> <span class="dt">::</span> q_ups_t, h_ups_t</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table class="caption-top table">
@@ -621,8 +620,8 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="その他の重要なパラメータ" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="その他の重要なパラメータ"><span class="header-section-number">7.7</span> その他の重要なパラメータ</h2>
+<section id="その他の重要なパラメータ" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="その他の重要なパラメータ"><span class="header-section-number">5.8</span> その他の重要なパラメータ</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -676,7 +675,6 @@ window.Quarto = {
 <p>これらの変数は、Nays2DHの計算において重要な役割を果たします。適切な設定と理解が、シミュレーション結果の精度と信頼性に直結します。</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1099,13 +1097,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./sediment_mixed.html" class="pagination-link" aria-label="混合粒径モデルの概要">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">混合粒径モデルの概要</span></span>
+      <a href="./sediment_mixed.html" class="pagination-link" aria-label="混合粒径モデル">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">混合粒径モデル</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./program_subroutines.html" class="pagination-link" aria-label="主要モジュール">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">主要モジュール</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./program_subroutines.html" class="pagination-link" aria-label="サブルーチン一覧">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">サブルーチン一覧</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
