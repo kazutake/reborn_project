@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Nays2DHモデル技術解説書(暫定版)",
+    "title": "Nays2DHモデル技術解説書(DEMO版)",
     "section": "",
     "text": "まえがき\nNays2DHは、複雑な河川地形における水流と河床変動を計算するための二次元水理計算モデルである。本解説書では、Nays2DHの理論的基礎、数値計算手法、プログラム構造について詳細に解説する。",
     "crumbs": [
@@ -12,7 +12,7 @@
   {
     "objectID": "index.html#モデルの概要",
     "href": "index.html#モデルの概要",
-    "title": "Nays2DHモデル技術解説書(暫定版)",
+    "title": "Nays2DHモデル技術解説書(DEMO版)",
     "section": "モデルの概要",
     "text": "モデルの概要\nNays2DHは以下の特徴を持つ数値計算モデルである：\n\n浅水流方程式に基づく二次元平面流計算\n非構造格子による複雑地形への適用\n河床変動計算（掃流砂・浮遊砂）\n混合粒径の取り扱い\n植生・構造物の影響評価",
     "crumbs": [
@@ -22,7 +22,7 @@
   {
     "objectID": "index.html#開発の経緯",
     "href": "index.html#開発の経緯",
-    "title": "Nays2DHモデル技術解説書(暫定版)",
+    "title": "Nays2DHモデル技術解説書(DEMO版)",
     "section": "開発の経緯",
     "text": "開発の経緯\nNays2DHは北海道大学と京都大学の研究者によって開発され、iRICソフトウェアのソルバーとして実装されている。河川工学の研究・実務への適用を目的として継続的に改良されている。",
     "crumbs": [
@@ -32,7 +32,7 @@
   {
     "objectID": "index.html#解説書の構成",
     "href": "index.html#解説書の構成",
-    "title": "Nays2DHモデル技術解説書(暫定版)",
+    "title": "Nays2DHモデル技術解説書(DEMO版)",
     "section": "解説書の構成",
     "text": "解説書の構成\n本解説書は以下の構成となっている：\n\n基礎式：モデルの理論的基盤となる基礎方程式の解説\n境界条件：計算領域の境界における条件設定\nプログラム説明：変数、サブルーチン、詳細実装の解説",
     "crumbs": [
@@ -42,7 +42,7 @@
   {
     "objectID": "index.html#謝辞",
     "href": "index.html#謝辞",
-    "title": "Nays2DHモデル技術解説書(暫定版)",
+    "title": "Nays2DHモデル技術解説書(DEMO版)",
     "section": "謝辞",
     "text": "謝辞\nこのモデルの開発に携わったすべての研究者・技術者に感謝する。",
     "crumbs": [
